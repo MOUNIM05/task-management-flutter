@@ -4,7 +4,15 @@ import '../widgets/task_item.dart';
 import '../services/task_storage.dart';
 
 class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key});
+  final VoidCallback onToggleTheme;
+  final bool isDark;
+
+  const HomeScreen({
+    super.key,
+    required this.onToggleTheme,
+    required this.isDark,
+  });
+
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
@@ -108,16 +116,40 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Task Management'),
-        centerTitle: true,
+  title: const Text('Task Management'),
+  centerTitle: true,
+  actions: [
+    IconButton(
+      icon: Icon(
+        widget.isDark ? Icons.light_mode : Icons.dark_mode,
       ),
-      body: tasks.isEmpty
-          ? const Center(
-              child: Text(
-                'No tasks yet',
-                style: TextStyle(fontSize: 18),
+      onPressed: widget.onToggleTheme,
+    ),
+  ],
+),
+
+    body: tasks.isEmpty
+    ? Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: const [
+            Icon(
+              Icons.task_alt,
+              size: 80,
+              color: Colors.grey,
+            ),
+            SizedBox(height: 12),
+            Text(
+              'No tasks yet',
+              style: TextStyle(
+                fontSize: 18,
+                color: Colors.grey,
               ),
-            )
+            ),
+          ],
+        ),
+      )
+
           : ListView.builder(
               itemCount: tasks.length,
               itemBuilder: (context, index) {
