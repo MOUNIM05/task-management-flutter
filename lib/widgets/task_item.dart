@@ -4,12 +4,14 @@ import '../models/task.dart';
 class TaskItem extends StatelessWidget {
   final Task task;
   final VoidCallback onDelete;
+  final VoidCallback onEdit;
   final Function(String) onStatusChange;
 
   const TaskItem({
     super.key,
     required this.task,
     required this.onDelete,
+    required this.onEdit,
     required this.onStatusChange,
   });
 
@@ -40,6 +42,10 @@ class TaskItem extends StatelessWidget {
         trailing: Row(
           mainAxisSize: MainAxisSize.min,
           children: [
+            IconButton(
+              icon: const Icon(Icons.edit, color: Colors.blue),
+              onPressed: onEdit,
+            ),
             PopupMenuButton<String>(
               onSelected: onStatusChange,
               itemBuilder: (context) => const [
