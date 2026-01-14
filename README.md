@@ -58,8 +58,7 @@ lib/
 │ └── task_item.dart
 └── main.dart
 
-yaml
-Copy code
+
 
 ---
 
@@ -72,7 +71,6 @@ Copy code
 
 ### Run the project
 
-```bash
 flutter pub get
 flutter run
 💡 What I Learned
