@@ -84,12 +84,12 @@ UI/UX improvements
 
 Dark Mode implementation
 
-👨‍💻 Author
-PUT YOUR NAME HERE
+👨‍💻 Author :
+ABdelmounim maani 
 Junior Flutter Developer
 GitHub: https://github.com/MOUNIM05
 
-📄 License
+📄 License :
 This project is open source and available for learning purposes.
 
 
