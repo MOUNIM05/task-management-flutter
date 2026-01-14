@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../models/task.dart';
+import '../widgets/task_item.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -70,38 +71,32 @@ class _HomeScreenState extends State<HomeScreen> {
         centerTitle: true,
       ),
       body: tasks.isEmpty
-          ? const Center(
-              child: Text(
-                'No tasks yet',
-                style: TextStyle(fontSize: 18),
-              ),
-            )
-          : ListView.builder(
-              itemCount: tasks.length,
-              itemBuilder: (context, index) {
-                return ListTile(
-                  title: Text(tasks[index].title),
-                  subtitle: Text(
-                    tasks[index].status,
-                    style: TextStyle(
-                      color: _statusColor(tasks[index].status),
-                    ),
-                  ),
-                  trailing: PopupMenuButton<String>(
-                    onSelected: (value) {
-                      setState(() {
-                        tasks[index].status = value;
-                      });
-                    },
-                    itemBuilder: (context) => const [
-                      PopupMenuItem(value: 'Todo', child: Text('Todo')),
-                      PopupMenuItem(value: 'Doing', child: Text('Doing')),
-                      PopupMenuItem(value: 'Done', child: Text('Done')),
-                    ],
-                  ),
-                );
-              },
-            ),
+    ? const Center(
+        child: Text(
+          'No tasks yet',
+          style: TextStyle(fontSize: 18),
+        ),
+      )
+    : ListView.builder(
+        itemCount: tasks.length,
+        itemBuilder: (context, index) {
+          return TaskItem(
+            task: tasks[index],
+            onDelete: () {
+              setState(() {
+                tasks.removeAt(index);
+              });
+            },
+            onStatusChange: (value) {
+              setState(() {
+                tasks[index].status = value;
+              });
+            },
+          );
+        },
+      ),
+
+
       floatingActionButton: FloatingActionButton(
         onPressed: _showAddTaskDialog,
         child: const Icon(Icons.add),
